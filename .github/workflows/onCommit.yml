@@ -4,6 +4,8 @@ on: [push]
 
 jobs:
   commitChecks:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Clone project
         uses: actions/checkout@v3
