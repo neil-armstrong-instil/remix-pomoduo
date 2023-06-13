@@ -1,7 +1,6 @@
 services:
   - type: web
     name: remix-pomoduo
-    region: frankfurt
     env: node
     plan: free
     repo: https://github.com/neil-armstrong-instil/remix-pomoduo
