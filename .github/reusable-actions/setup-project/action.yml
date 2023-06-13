@@ -1,0 +1,27 @@
+name: "Setup project"
+description: "Setup node, yarn, etc"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: ".node-version"
+        cache: "yarn"
+
+    - name: Setup yarn
+      shell: bash
+      run: |
+        npm install -g yarn
+        npm i -g corepack --force
+
+    - name: Install dependencies with lockfile checks
+      shell: bash
+      if: ${{github.actor != 'dependabot[bot]'}}
+      run: yarn install
+
+    - name: Install dependencies without lockfile checks
+      shell: bash
+      if: ${{github.actor == 'dependabot[bot]'}}
+      run: yarn install --mode=skip-build

@@ -1,0 +1,36 @@
+name: Run on every commit
+
+on: [push]
+
+jobs:
+  commitChecks:
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v3
+
+      - name: Setup project
+        uses: ./.github/reusable-actions/setup-project
+
+      - name: Run checks
+        uses: ./.github/reusable-actions/check-project
+
+  deploy:
+    needs: commitChecks
+    if: github.ref == 'refs/heads/main'
+    concurrency: "1"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v3
+
+      - name: Setup project
+        uses: ./.github/reusable-actions/setup-project
+
+      - name: Check Webapp deployment
+        uses: neil-armstrong-instil/render-deployment-checker@v1
+        env:
+          RENDER_APIKEY: ${{secrets.RENDER_APIKEY}}
+        with:
+          serviceId: "srv-cdqc0larrk09t4b2bd50"
+          deploymentName: "Webapp"

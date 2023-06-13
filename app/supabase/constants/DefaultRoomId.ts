@@ -1,0 +1,1 @@
+export const defaultRoomId = "tender-brown-lunch";
