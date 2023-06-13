@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: acceptance-test-example-api
+    name: remix-pomoduo
     env: node
     plan: free
     repo: https://github.com/neil-armstrong-instil/remix-pomoduo
