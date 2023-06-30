@@ -36,14 +36,14 @@ export const TimerPage: FC<Props> = (
               waitInMilliseconds={waitInMilliseconds}
               isPaused={isPaused}
             />
-
-            <Buttons
-              isPaused={isPaused}
-              onPause={onPause}
-              onReset={onReset}
-            />
           </>
         )}
+
+        <Buttons
+          isPaused={isPaused}
+          onPause={onPause}
+          onReset={onReset}
+        />
       </div>
     </main>
   );
