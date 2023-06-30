@@ -1,5 +1,4 @@
 import type {FC} from "react";
-import { useState} from "react";
 import {useTimeLeftInMilliseconds} from "~/pages/timer-page/hooks/UseTimeLeftInMilliseconds";
 import {useRestartTimer} from "~/pages/timer-page/hooks/UseRestartTimer";
 import {Timer} from "~/pages/timer-page/components/Timer";
@@ -25,17 +24,27 @@ export const TimerPage: FC<Props> = (
   return (
     <main className="flex justify-center items-center min-h-screen bg-amber-600">
       <div className="flex flex-col justify-center items-center p-2 w-96 bg-opacity-5 bg-white border-transparent rounded">
-        <Timer
-          waitInMilliseconds={waitInMilliseconds}
-          isPaused={isPaused}
-        />
+        {room?.timer_end_time == null && (
+          <div className="text-2xl text-center font-mono">
+            JOSH HAS RESET ON HIS SILLY APP INSTEAD
+          </div>
+        )}
 
-        <Buttons
-          isPaused={isPaused}
-          onPause={onPause}
-          onReset={onReset}
-        />
+        {room?.timer_end_time != null && (
+          <>
+            <Timer
+              waitInMilliseconds={waitInMilliseconds}
+              isPaused={isPaused}
+            />
+
+            <Buttons
+              isPaused={isPaused}
+              onPause={onPause}
+              onReset={onReset}
+            />
+          </>
+        )}
       </div>
     </main>
   );
-}
+};

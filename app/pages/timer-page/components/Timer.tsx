@@ -43,7 +43,7 @@ export const Timer: FC<Props> = (
   }, [timeLeftInSeconds]);
 
   return (
-    <div className="flex justify-center items-center text-8xl">
+    <div className="flex justify-center items-center text-8xl font-mono">
       {timerText}
     </div>
   );

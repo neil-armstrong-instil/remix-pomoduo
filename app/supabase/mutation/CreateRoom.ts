@@ -4,20 +4,20 @@ import type {Room} from "~/supabase/types/Room";
 
 const twentyFiveMinutes = 25 * 60 * 1000;
 
+type Create = Pick<Room, "room" | "timer_end_time">
+
 export async function createRoom(roomId: string): Promise<Room> {
   const now = new Date();
   
-  const room: Room = {
+  const room: Create = {
     room: roomId,
-    created_at: now,
-    updated_at: now,
-    timer_end_time: new Date(new Date().getTime() + twentyFiveMinutes),
-    paused: false
+    timer_end_time: new Date(now.getTime() + twentyFiveMinutes)
   }
 
-  await supabaseClient()
+  const update = await supabaseClient()
     .from(databaseName)
-    .insert(room);
+    .insert(room)
+    .single<Room>()
 
-  return room;
+  return update.data!;
 }

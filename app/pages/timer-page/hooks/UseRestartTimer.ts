@@ -8,6 +8,6 @@ export function useRestartTimer(room: Room | undefined): () => void {
   return useCallback(() => {
     if (!room) return;
 
-    updateRoomEndTime(room.room, new Date(new Date().getTime() + twentyFiveMinutes + 1000))
+    updateRoomEndTime(room, new Date(new Date().getTime() + twentyFiveMinutes))
   }, [room]);
 }

@@ -4,10 +4,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn lint && yarn test && yarn remix build",
-    "dev": "yarn cross-env NODE_ENV=development yarn binode --require ./mocks -- @remix-run/dev:remix dev",
+    "dev": "yarn cross-env NODE_ENV=development yarn binode -- @remix-run/dev:remix dev",
     "lint": "yarn eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "yarn remix-serve build",
-    "start:mocks": "yarn binode --require ./mocks -- @remix-run/serve:remix-serve build",
     "test": "yarn vitest --passWithNoTests"
   },
   "dependencies": {
