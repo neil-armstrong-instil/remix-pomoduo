@@ -2,12 +2,11 @@ import {updateRoomEndTime} from "~/supabase/mutation/UpdateRoomEndTime";
 import {useCallback} from "react";
 import type {Room} from "~/supabase/types/Room";
 
-const twentyFiveMinutes = 25 * 60 * 1000;
-
-export function useRestartTimer(room: Room | undefined): () => void {
-  return useCallback(() => {
+export function useRestartTimer(room: Room | undefined): (newTimerInMinutes: number) => void {
+  return useCallback((newTimerInMinutes = 25) => {
     if (!room) return;
 
-    updateRoomEndTime(room, new Date(new Date().getTime() + twentyFiveMinutes))
+    const asMilliseconds = newTimerInMinutes * 60 * 1000;
+    updateRoomEndTime(room, new Date(new Date().getTime() + asMilliseconds))
   }, [room]);
 }

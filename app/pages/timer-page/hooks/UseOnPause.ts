@@ -5,7 +5,7 @@ import type {Room} from "~/supabase/types/Room";
 export function useOnPause(room: Room | undefined): [boolean, () => void] {
   const isPaused = useMemo(() => {
     return room?.timer_paused_time != null
-  }, [room]);
+  }, [room?.timer_paused_time]);
 
   const togglePause = useCallback(() => {
     if (!room) return;
