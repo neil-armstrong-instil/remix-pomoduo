@@ -21,7 +21,13 @@ export const InactiveButtons: FC<Props> = (
     const asNumber = Number(event.target.value);
     if (Number.isNaN(asNumber)) return;
 
-    setNewTimerInMinutes(asNumber);
+    if (asNumber > 99) {
+      setNewTimerInMinutes(99);
+    } else if (asNumber < 0) {
+      setNewTimerInMinutes(0);
+    } else {
+      setNewTimerInMinutes(asNumber);
+    }
   }, []);
 
   const [, onResume] = useOnPause(room);
@@ -39,6 +45,7 @@ export const InactiveButtons: FC<Props> = (
         <div className="flex flex-col justify-center items-center">
           <Input
             type="number"
+            pattern="\d+"
             step={1}
             value={newTimerInMinutes}
             onChange={onTimerChanged}
